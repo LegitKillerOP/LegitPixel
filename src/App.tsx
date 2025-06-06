@@ -1,10 +1,12 @@
+import Home from './pages/Home';
 
-function App() {
-
+const App = () => {
   return (
-    <>
-    </>
-  )
-}
+    <div className="p-pageWrapper">
+      {/* Your header, main content, footer, etc */}
+      <Home />
+    </div>
+  );
+};
 
-export default App
+export default App;

@@ -1,1 +1,21 @@
 @import "tailwindcss";
+html {
+    font: 15px / 1.4 sans-serif;
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    color: #0b0a07;
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+    background-color: #0b0a07;
+    --js-display: block;
+}
+.p-pageWrapper {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: #0b0a07 url('https://hypixel.net/styles/hypixel-v2/images/header-bg.png');
+    background-position: top center;
+    background-repeat: no-repeat;
+}
