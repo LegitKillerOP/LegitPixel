@@ -5,7 +5,7 @@ const Header = () => {
   const [tooltipVisible, setTooltipVisible] = React.useState(false);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText('mc.hypixel.net');
+    navigator.clipboard.writeText('mc.legitpixel.fun');
     setTooltipVisible(true);
     setTimeout(() => setTooltipVisible(false), 1500);
   };
@@ -66,7 +66,7 @@ const Header = () => {
                 Play Now
               </a>
 
-              <div className="relative mt-3 text-[17px] font-normal text-[#f4c75d] uppercase text-shadow-lg">
+              <div className="relative mt-3 text-[17px] font-normal text-[#ffd87d] uppercase text-shadow-lg">
                 <span className="mr-1 text-[15px] font-thin text-white">Server IP »</span>
                 <span
                   className="cursor-pointer hover:underline transition-all duration-300"
