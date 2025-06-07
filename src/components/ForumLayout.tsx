@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ChevronRight, MessageCircle, Youtube, Twitter, Instagram, Facebook } from 'lucide-react';
 
 // Type definitions
@@ -37,9 +37,6 @@ interface ThreadItemProps {
 }
 
 const ForumLayout = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 148;
-
   const newsItems: NewsItem[] = [
     {
       id: 1,
