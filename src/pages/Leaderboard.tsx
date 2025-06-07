@@ -1,12 +1,6 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Navigation from "../components/Navigation";
-
 export default function Leaderboards() {
   return (
     <div style={{ fontFamily: "Neuton, serif" }}>
-      <Header />
-      <Navigation />
 
       <div className="max-w-[1200px] mx-auto px-5 sm:px-20 flex-col">
         <ul className="breadcrumbs py-2">
@@ -131,8 +125,6 @@ export default function Leaderboards() {
         className="h-12 mb-10 bg-no-repeat bg-top bg-center"
         style={{ backgroundImage: "url(/assets/content-bottom-bg.png)" }}
       ></div>
-
-      <Footer />
     </div>
   );
 }

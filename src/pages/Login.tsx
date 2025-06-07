@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { loginUser, signInWithGoogle } from "../lib/auth";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import Navigation from "../components/Navigation";
-import Footer from "../components/Footer";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -32,9 +29,6 @@ export default function Login() {
 
   return (
     <>
-      <Header />
-      <Navigation />
-
       <div className="max-w-[1200px] mx-40 px-4 sm:px-6 lg:px-20 flex-col">
         <ul className="breadcrumbs py-2">
           <li className="text-yellow-400">Home</li>
@@ -117,8 +111,6 @@ export default function Login() {
         className="h-12 mb-10 bg-no-repeat bg-top"
         style={{ backgroundImage: "url(/assets/content-bottom-bg.png)" }}
       ></div>
-
-      <Footer />
     </>
   );
 }

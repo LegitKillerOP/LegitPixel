@@ -1,7 +1,4 @@
 import { useState } from "react";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Navigation from "../components/Navigation";
 
 const games = [
   {
@@ -99,8 +96,6 @@ export default function Games() {
 
   return (
     <div>
-      <Header />
-      <Navigation />
 
       {/* Instructions */}
       <div className="p-body my-10" style={{fontFamily: "Neuton, serif"}}>
@@ -317,8 +312,6 @@ export default function Games() {
         />
       </div>
     </div>
-
-      <Footer />
     </div>
   );
 }

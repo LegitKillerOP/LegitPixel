@@ -5,12 +5,16 @@ import Leaderboard from "./pages/Leaderboard";
 import Rules from "./pages/Rules";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Header from "./components/Header";
+import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
     <Router>
       <div className="p-pageWrapper">
-        {/* Header can go here if any */}
+        <Header />
+        <Navigation />
 
         <Routes>
           <Route path="/" element={<Home />} />
@@ -20,6 +24,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
+
+        <Footer />
 
       </div>
     </Router>
