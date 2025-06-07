@@ -47,7 +47,7 @@ export default function Navigation() {
           <Menu size={24} />
         </button>
         <a href="/" className="flex items-center">
-          <img src="/assets/logo.png" alt="Hypixel Forums" width={60} />
+          <img src="/assets/logo.png" alt="LegitPixel Forums" width={60} />
         </a>
         <button onClick={() => setSearchOpen(!searchOpen)} className="text-black">
           <Search size={24} />
@@ -92,7 +92,7 @@ export default function Navigation() {
             </button>
             {rulesOpen && (
               <div className="absolute top-full mt-1 left-0 w-full bg-white text-black shadow-md rounded z-50">
-                <a href="/hypixel-rules" className="block px-4 py-2 hover:bg-gray-100">Server Rules</a>
+                <a href="/legitpixel-rules" className="block px-4 py-2 hover:bg-gray-100">Server Rules</a>
                 <a href="/skyblock-rules" className="block px-4 py-2 hover:bg-gray-100">SkyBlock Rules</a>
                 <a href="/forum-rules" className="block px-4 py-2 hover:bg-gray-100">Forum Rules</a>
                 <a href="/terms" className="block px-4 py-2 hover:bg-gray-100">Terms of Service</a>

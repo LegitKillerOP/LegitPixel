@@ -77,7 +77,7 @@ const ForumLayout = () => {
       avatar: "/api/placeholder/32/32",
       time: "Today at 8:22 AM",
       timeAgo: "5h",
-      forum: "Hypixel Forums Discussion"
+      forum: "LegitPixel Forums Discussion"
     },
     {
       id: 2,
@@ -162,7 +162,7 @@ const ForumLayout = () => {
         
         <div className="flex justify-between items-center pt-3 border-t border-gray-200">
           <div className="text-sm text-gray-500">
-            by <span className="text-blue-600 font-medium">Hypixel Team</span> at <span className="text-blue-600">{item.time}</span>
+            by <span className="text-blue-600 font-medium">LegitPixel Team</span> at <span className="text-blue-600">{item.time}</span>
           </div>
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1 text-gray-500 text-sm">
@@ -261,7 +261,7 @@ const ForumLayout = () => {
                 {/* Upgrade Account CTA */}
                 <div className="bg-gradient-to-br from-orange-500 to-red-600 rounded-lg p-4 text-center text-white shadow-lg">
                   <div className="bg-black bg-opacity-20 rounded p-3 mb-3">
-                    <div className="text-lg font-bold text-yellow-300">HYPIXEL</div>
+                    <div className="text-lg font-bold text-yellow-300">LegitPixel</div>
                     <div className="text-sm">Upgrade Account!</div>
                   </div>
                   <div className="text-sm mb-3">Ranks, SkyBlock Gems, and more</div>

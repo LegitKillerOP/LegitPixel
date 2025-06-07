@@ -35,7 +35,7 @@ const Footer = () => {
             </h3>
             <p className="leading-relaxed text-justify">
               Starting out as a YouTube channel making Minecraft Adventure Maps,
-              Hypixel is now one of the largest and highest quality Minecraft
+              LegitPixel is now one of the largest and highest quality Minecraft
               Server Networks in the world, featuring original games such as The
               Walls, Mega Walls, Blitz Survival Games, and many more!
             </p>
@@ -75,18 +75,18 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Hypixel Store */}
+          {/* LegitPixel Store */}
           <div>
             <h3 className="text-lg font-semibold flex items-center mb-4">
               <FontAwesomeIcon
                 icon={faShoppingCart}
                 className="mr-2 text-[#535353]"
               />
-              Hypixel Store
+              LegitPixel Store
             </h3>
             <p className="leading-relaxed mb-6 text-justify">
               We work very hard to bring you unique, originally created content.
-              Purchasing ranks, Hypixel Gold, and SkyBlock Gems helps support us
+              Purchasing ranks, LegitPixel Gold, and SkyBlock Gems helps support us
               in making more, higher quality content.
             </p>
             <a

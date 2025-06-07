@@ -46,7 +46,7 @@ const Header = () => {
               <a href="/" className="block w-[150px]">
                 <img
                   src={logo}
-                  alt="Hypixel Forums"
+                  alt="LegitPixel Forums"
                   className="w-full object-contain"
                 />
               </a>
@@ -72,7 +72,7 @@ const Header = () => {
                   className="cursor-pointer hover:underline transition-all duration-300"
                   onClick={copyToClipboard}
                 >
-                  mc.hypixel.net
+                  mc.LegitPixel.fun
                 </span>
                 {tooltipVisible && (
                   <div
