@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import Games from "./pages/Games";
 import Leaderboard from "./pages/Leaderboard";
+import Rules from "./pages/Rules";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/games" element={<Games />} />
           <Route path="/players" element={<Leaderboard />} />
+          <Route path="/rules" element={<Rules />} />
         </Routes>
 
       </div>
