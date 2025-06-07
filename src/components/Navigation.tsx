@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Menu, Search, X } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";  // Adjust path as needed
 
 export default function Navigation() {
+  const { user } = useContext(AuthContext); // Get current logged in user
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [forumOpen, setForumOpen] = useState(false);
@@ -10,16 +12,19 @@ export default function Navigation() {
   const [showScrollButton, setShowScrollButton] = useState(false);
 
   const location = useLocation();
+
   const toggleRulesDropdown = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation(); // Prevent bubbling to <a>
     e.preventDefault();  // Prevent navigation
     setRulesOpen(!rulesOpen);
   };
+
   const toggleForumsDropdown = (e: React.MouseEvent<HTMLSpanElement>) => {
-    e.stopPropagation(); // Prevent bubbling to <a>
-    e.preventDefault();  // Prevent navigation
+    e.stopPropagation();
+    e.preventDefault();
     setForumOpen(!forumOpen);
   };
+
   // Auto-close on route change
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -76,7 +81,7 @@ export default function Navigation() {
             <a href="/players" className={`${navButtonClasses} bg-[url('/assets/button-leaderboards.png')]`}>Leaderboards</a>
           </li>
           <li className="w-[127px] relative">
-            <a href="/forums  " className={`block bg-[url('/assets/button-rules.png')] ${navButtonClasses}`}>Forums
+            <a href="/forums" className={`block bg-[url('/assets/button-rules.png')] ${navButtonClasses}`}>Forums
               <span
                 className="ml-1 cursor-pointer"
                 onClick={toggleForumsDropdown}>▼</span>
@@ -153,8 +158,12 @@ export default function Navigation() {
           </button>
         </div>
         <ul className="p-4 space-y-2 text-[#ffd87d]">
-          <li><a href="/login" className="block py-2 px-2">Login</a></li>
-          <li><a href="/register" className="block py-2 px-2">Register</a></li>
+          {!user && (
+            <>
+              <li><a href="/login" className="block py-2 px-2">Login</a></li>
+              <li><a href="/register" className="block py-2 px-2">Register</a></li>
+            </>
+          )}
           <li><a href="/" className="block py-2 px-2">Home</a></li>
           <li><a href="/games" className="block py-2 px-2">Games</a></li>
           <li><a href="/players" className="block py-2 px-2">Leaderboards</a></li>
