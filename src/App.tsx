@@ -5,6 +5,7 @@ import Leaderboard from "./pages/Leaderboard";
 import Rules from "./pages/Rules";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Account from "./pages/Account";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/rules" element={<Rules />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/account/*" element={<Account />} />
         </Routes>
 
         <Footer />
