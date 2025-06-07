@@ -10,7 +10,16 @@ export default function Navigation() {
   const [showScrollButton, setShowScrollButton] = useState(false);
 
   const location = useLocation();
-
+  const toggleRulesDropdown = (e: React.MouseEvent<HTMLSpanElement>) => {
+    e.stopPropagation(); // Prevent bubbling to <a>
+    e.preventDefault();  // Prevent navigation
+    setRulesOpen(!rulesOpen);
+  };
+  const toggleForumsDropdown = (e: React.MouseEvent<HTMLSpanElement>) => {
+    e.stopPropagation(); // Prevent bubbling to <a>
+    e.preventDefault();  // Prevent navigation
+    setForumOpen(!forumOpen);
+  };
   // Auto-close on route change
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -67,12 +76,11 @@ export default function Navigation() {
             <a href="/players" className={`${navButtonClasses} bg-[url('/assets/button-leaderboards.png')]`}>Leaderboards</a>
           </li>
           <li className="w-[127px] relative">
-            <button
-              onClick={() => setForumOpen(!forumOpen)}
-              className={`${navButtonClasses} bg-[url('/assets/button-forums.png')] w-full`}
-            >
-              Forums <span className="ml-1">▼</span>
-            </button>
+            <a href="/forums  " className={`block bg-[url('/assets/button-rules.png')] ${navButtonClasses}`}>Forums
+              <span
+                className="ml-1 cursor-pointer"
+                onClick={toggleForumsDropdown}>▼</span>
+            </a>
             {forumOpen && (
               <div className="absolute top-full mt-1 left-0 w-full bg-white text-black shadow-md rounded z-50">
                 <a href="/whats-new/posts/" className="block px-4 py-2 hover:bg-gray-100">New posts</a>
@@ -84,12 +92,11 @@ export default function Navigation() {
             <a href="https://wiki.hypixel.net/Main_Page" className={`${navButtonClasses} bg-[url('/assets/button-wiki.png')]`}>Wiki</a>
           </li>
           <li className="w-[183px] relative">
-            <button
-              onClick={() => setRulesOpen(!rulesOpen)}
-              className={`${navButtonClasses} bg-[url('/assets/button-rules.png')] w-full`}
-            >
-              Rules & Policies <span className="ml-1">▼</span>
-            </button>
+            <a href="/rules" className={`block bg-[url('/assets/button-rules.png')] ${navButtonClasses}`}>Rules & Policies
+              <span
+                className="ml-1 cursor-pointer"
+                onClick={toggleRulesDropdown}>▼</span>
+            </a>
             {rulesOpen && (
               <div className="absolute top-full mt-1 left-0 w-full bg-white text-black shadow-md rounded z-50">
                 <a href="/legitpixel-rules" className="block px-4 py-2 hover:bg-gray-100">Server Rules</a>
