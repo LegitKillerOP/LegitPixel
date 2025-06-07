@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Neuton&display=swap');
 html {
     font: 15px / 1.4 sans-serif;
     font-family: Arial, sans-serif;
