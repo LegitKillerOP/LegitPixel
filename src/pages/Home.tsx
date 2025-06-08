@@ -1,9 +1,10 @@
-import ForumLayout from '../components/ForumLayout';
+import MainHome from "../components/MainHome";
+
 
 const Home = () => {
   return (
     <div style={{ backgroundImage: `url('/src/assets/background.png')` }} className="min-h-screen bg-cover bg-fixed bg-center">
-      <ForumLayout />
+      <MainHome />
     </div>
   );
 };

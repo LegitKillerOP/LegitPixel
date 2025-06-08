@@ -23,13 +23,13 @@ export default function Leaderboards() {
 
       {/* Top Decoration */}
       <div
-        className="h-12 bg-no-repeat bg-top bg-center"
+        className="h-12 bg-no-repeat bg-top"
         style={{ backgroundImage: "url(/assets/content-top-bg.png)" }}
       ></div>
 
       {/* Main Content */}
       <div
-        className="bg-repeat-y bg-top bg-center"
+        className="bg-repeat-y bg-top"
         style={{
           backgroundImage: "url(/assets/content-middle-bg.png)",
         }}
@@ -122,7 +122,7 @@ export default function Leaderboards() {
 
       {/* Bottom Decoration */}
       <div
-        className="h-12 mb-10 bg-no-repeat bg-top bg-center"
+        className="h-12 mb-10 bg-no-repeat bg-top"
         style={{ backgroundImage: "url(/assets/content-bottom-bg.png)" }}
       ></div>
     </div>

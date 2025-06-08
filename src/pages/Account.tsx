@@ -1,7 +1,7 @@
 import { useAuth } from '../context/AuthContext';
 
 const Account = () => {
-  const { currentUser, userData } = useAuth();
+  const { userData } = useAuth();
 
   const username = userData?.username || 'User';
   const email = userData?.email || 'example@email.com';

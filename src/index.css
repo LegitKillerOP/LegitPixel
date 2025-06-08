@@ -16,7 +16,7 @@ html {
     position: relative;
     display: flex;
     flex-direction: column;
-    background: #0b0a07 url('https://hypixel.net/styles/hypixel-v2/images/header-bg.png');
+    background: #0b0a07 url('/assets/header-bg.png');
     background-position: top center;
     background-repeat: no-repeat;
 }

@@ -15,7 +15,7 @@ interface ForumPost {
   createdAt: Date;
 }
 
-const ForumLayout: React.FC = () => {
+const MainHome: React.FC = () => {
   const [topPosts, setTopPosts] = useState<ForumPost[]>([]);
 
   useEffect(() => {
@@ -131,11 +131,11 @@ const ForumLayout: React.FC = () => {
 
       {/* Bottom Decoration */}
       <div
-        className="h-12 mb-10 bg-no-repeat bg-top bg-center"
+        className="h-12 mb-10 bg-no-repeat bg-top"
         style={{ backgroundImage: "url(/assets/content-bottom-bg.png)" }}
       ></div>
     </div>
   );
 }
 
-export default ForumLayout;
+export default MainHome;
