@@ -13,13 +13,13 @@ export default function Rules() {
 
       {/* Top Decoration */}
       <div
-        className="h-12 bg-no-repeat bg-top bg-center"
+        className="h-12 bg-no-repeat bg-top"
         style={{ backgroundImage: "url(/assets/content-top-bg.png)" }}
       ></div>
 
       {/* Main Content */}
       <div
-        className="bg-repeat-y bg-top bg-center"
+        className="bg-repeat-y bg-top"
         style={{ backgroundImage: "url(/assets/content-middle-bg.png)" }}
       >
         <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row px-4 sm:px-6 lg:px-16 py-4 gap-6">
@@ -76,7 +76,7 @@ export default function Rules() {
 
       {/* Bottom Decoration */}
       <div
-        className="h-12 mb-10 bg-no-repeat bg-top bg-center"
+        className="h-12 mb-10 bg-no-repeat bg-top"
         style={{ backgroundImage: "url(/assets/content-bottom-bg.png)" }}
       ></div>
     </div>
