@@ -9,6 +9,8 @@ import Account from "./pages/Account";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+import AdminPanel from "./pages/AdminPanel";
+import Forum from "./pages/Forum";
 
 const App = () => {
   return (
@@ -25,6 +27,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/account/*" element={<Account />} />
+          <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/forums" element={<Forum />} />
         </Routes>
 
         <Footer />

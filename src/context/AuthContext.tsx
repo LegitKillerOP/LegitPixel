@@ -1,39 +1,76 @@
-import { createContext, useEffect, useState } from "react";
-import type { ReactNode } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import type { User } from "firebase/auth";
+
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import type { User } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../utils/firebase';
+
+interface UserData {
+  uid: string;
+  email: string | null;
+  username: string;
+  isAdmin: boolean;
+  createdAt: any;
+}
 
 interface AuthContextType {
-  user: User | null;
+  currentUser: User | null;
+  userData: UserData | null;
   loading: boolean;
+  logout: () => Promise<void>;
 }
 
-export const AuthContext = createContext<AuthContextType>({
-  user: null,
-  loading: true,
-});
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-interface AuthProviderProps {
-  children: ReactNode;
-}
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<User | null>(null);
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const logout = async () => {
+    await signOut(auth);
+    setCurrentUser(null);
+    setUserData(null);
+  };
+
   useEffect(() => {
-    const auth = getAuth(); // make sure Firebase is initialized
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setCurrentUser(user);
+      
+      if (user) {
+        // Fetch user data from Firestore
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+        if (userDoc.exists()) {
+          setUserData(userDoc.data() as UserData);
+        }
+      } else {
+        setUserData(null);
+      }
+      
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    return unsubscribe;
   }, []);
 
+  const value = {
+    currentUser,
+    userData,
+    loading,
+    logout,
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading }}>
-      {children}
+    <AuthContext.Provider value={value}>
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

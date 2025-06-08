@@ -8,6 +8,9 @@ import {
 import { auth, db } from "../utils/firebase";
 import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 
+// Admin email for admin privileges
+export const ADMIN_EMAIL = "admin@hypixel.com";
+
 /**
  * Register a new user with email and password, and store user info in Firestore.
  */
@@ -19,11 +22,15 @@ export const registerUser = async (
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const user = userCredential.user;
 
+  // Determine if user is admin
+  const isAdmin = email === ADMIN_EMAIL;
+
   // Save user data to Firestore
   await setDoc(doc(db, "users", user.uid), {
     uid: user.uid,
     email,
     username,
+    isAdmin,
     createdAt: serverTimestamp(),
   });
 
@@ -50,10 +57,12 @@ export const signInWithGoogle = async () => {
 
   // Only store if it's a new user
   if (!docSnap.exists()) {
+    const isAdmin = user.email === ADMIN_EMAIL;
     await setDoc(userRef, {
       uid: user.uid,
       email: user.email,
       username: user.displayName || "Unknown",
+      isAdmin,
       createdAt: serverTimestamp(),
     });
   }

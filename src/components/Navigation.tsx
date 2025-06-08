@@ -1,17 +1,17 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Menu, Search, X } from "lucide-react";
 import { useLocation } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";  // Adjust path as needed
+import { useAuth } from "../context/AuthContext";  // import useAuth hook
 
 export default function Navigation() {
-  const { user } = useContext(AuthContext); // Get current logged in user
+  const { currentUser: user } = useAuth(); // use currentUser from context
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [forumOpen, setForumOpen] = useState(false);
   const [rulesOpen, setRulesOpen] = useState(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
 
-  const location = useLocation();
+  const location = useLocation()
 
   const toggleRulesDropdown = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation(); // Prevent bubbling to <a>

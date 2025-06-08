@@ -1,23 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import logo from '/assets/logo.png';
-import { AuthContext } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 // Font Awesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faBell } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
-  const [tooltipVisible, setTooltipVisible] = React.useState(false);
+  const { currentUser } = useAuth();
+  const [tooltipVisible, setTooltipVisible] = useState(false);
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText('mc.legitpixel.fun');
-    setTooltipVisible(true);
-    setTimeout(() => setTooltipVisible(false), 1500);
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText('mc.legitpixel.fun');
+      setTooltipVisible(true);
+      setTimeout(() => setTooltipVisible(false), 1500);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
   };
 
   // Get display name fallback to email or "User"
-  const username = user?.displayName || user?.email || 'User';
+  const username = currentUser?.displayName || currentUser?.email || 'User';
 
   return (
     <header className="relative text-white">
@@ -25,7 +29,7 @@ const Header = () => {
       <div className="text-[13px] text-[#ffd87d] bg-[rgba(16,14,9,0.6)] border-b border-l border-r border-[#4e422f] fixed top-0 left-0 right-0 z-50">
         <div className="max-w-[1200px] mx-auto px-[10px] h-[42px] overflow-y-hidden relative">
           <div className="whitespace-nowrap overflow-x-scroll pb-[30px] -mb-[30px]">
-            {!user && (
+            {!currentUser && (
               <div className="float-right bg-[rgba(11,10,7,0.15)] rounded-t-md">
                 <a
                   href="/login"
@@ -41,15 +45,26 @@ const Header = () => {
                 </a>
               </div>
             )}
-            {user && (
+            {currentUser && (
               <div className="float-right bg-[rgba(11,10,7,0.15)] rounded-t-md">
-                <a href='/account' className="inline-block align-top text-inherit py-3 px-[14px] border-l border-[#4e422f] first:rounded-tl-md first:border-l-0">
+                <a
+                  href="/account"
+                  className="inline-block align-top text-inherit py-3 px-[14px] border-l border-[#4e422f] first:rounded-tl-md first:border-l-0"
+                >
                   {username}
                 </a>
-                <a href="/direct-messages" className="inline-block align-top text-inherit py-3 px-[14px] border-l border-[#4e422f] first:rounded-tl-md first:border-l-0">
+                <a
+                  href="/direct-messages"
+                  className="inline-block align-top text-inherit py-3 px-[14px] border-l border-[#4e422f]"
+                  title="Direct Messages"
+                >
                   <FontAwesomeIcon icon={faEnvelope} />
                 </a>
-                <a href="/account/alerts" className="inline-block align-top text-inherit py-3 px-[14px] border-l border-[#4e422f] first:rounded-tl-md first:border-l-0" title="Notifications">
+                <a
+                  href="/account/alerts"
+                  className="inline-block align-top text-inherit py-3 px-[14px] border-l border-[#4e422f]"
+                  title="Notifications"
+                >
                   <FontAwesomeIcon icon={faBell} />
                 </a>
               </div>
@@ -70,11 +85,7 @@ const Header = () => {
             {/* Logo */}
             <div>
               <a href="/" className="block w-[150px]">
-                <img
-                  src={logo}
-                  alt="LegitPixel Forums"
-                  className="w-full object-contain"
-                />
+                <img src={logo} alt="LegitPixel Forums" className="w-full object-contain" />
               </a>
             </div>
 
@@ -98,11 +109,11 @@ const Header = () => {
                   className="cursor-pointer hover:underline transition-all duration-300"
                   onClick={copyToClipboard}
                 >
-                  mc.LegitPixel.fun
+                  mc.legitpixel.fun
                 </span>
                 {tooltipVisible && (
                   <div
-                    className="absolute left-1/2 -translate-x-1/2 -bottom-6 w-[235px] p-1 text-xs bg-black bg-opacity-80 rounded text-center opacity-100"
+                    className="absolute left-1/2 -translate-x-1/2 -bottom-6 w-[235px] p-1 text-xs bg-black bg-opacity-80 rounded text-center opacity-100 pointer-events-none"
                     style={{ transition: 'opacity 0.13s' }}
                   >
                     Click to Copy!
