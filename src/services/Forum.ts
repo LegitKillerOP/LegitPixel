@@ -1,4 +1,4 @@
-
+import type { DocumentData } from 'firebase/firestore';
 import { 
   collection, 
   addDoc, 
@@ -47,14 +47,25 @@ export const createForumPost = async (
   return docRef.id;
 };
 
-export const getForumPosts = async () => {
-  const q = query(collection(db, 'forums'), orderBy('isPinned', 'desc'), orderBy('createdAt', 'desc'));
-  const querySnapshot = await getDocs(q);
-  
-  return querySnapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data()
-  })) as ForumPost[];
+export const getForumPosts = async (): Promise<ForumPost[]> => {
+  const q = query(collection(db, 'forumPosts'));
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs.map((doc) => {
+    const data = doc.data() as DocumentData;
+
+    return {
+      id: doc.id,
+      authorName: data.authorName || 'Anonymous',
+      category: data.category || 'general',
+      content: data.content || '',
+      createdAt: data.createdAt || new Date().toISOString(),
+      isPinned: data.isPinned || false,
+      replies: data.replies || 0,
+      title: data.title || '',
+      views: data.views || 0,
+    };
+  });
 };
 
 export const getForumPostsByCategory = async (category: string) => {
@@ -72,14 +83,14 @@ export const getForumPostsByCategory = async (category: string) => {
   })) as ForumPost[];
 };
 
-export const pinForumPost = async (postId: string, isPinned: boolean) => {
-  await updateDoc(doc(db, 'forums', postId), {
-    isPinned
-  });
+export const pinForumPost = async (postId: string, isPinned: boolean): Promise<void> => {
+  const postRef = doc(db, 'forumPosts', postId);
+  await updateDoc(postRef, { isPinned });
 };
 
-export const deleteForumPost = async (postId: string) => {
-  await deleteDoc(doc(db, 'forums', postId));
+export const deleteForumPost = async (postId: string): Promise<void> => {
+  const postRef = doc(db, 'forumPosts', postId);
+  await deleteDoc(postRef);
 };
 
 export const incrementViews = async (postId: string) => {
