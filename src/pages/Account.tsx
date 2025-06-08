@@ -1,13 +1,14 @@
 import { useAuth } from '../context/AuthContext';
+import { Link,NavLink } from 'react-router-dom';
 
 const Account = () => {
-  const { userData } = useAuth();
+  const { userData, logout } = useAuth();
 
   const username = userData?.username || 'User';
   const email = userData?.email || 'example@email.com';
 
   return (
-    <div style={{ fontFamily: "Neuton, serif" }}>
+    <div style={{ fontFamily: 'Neuton, serif' }}>
       <div className="max-w-[1200px] mx-auto px-5 sm:px-20 flex-col">
         <ul className="breadcrumbs py-2">
           <li className="text-yellow-400">Home</li>
@@ -20,13 +21,13 @@ const Account = () => {
       {/* Top Decoration */}
       <div
         className="h-12 bg-no-repeat bg-top"
-        style={{ backgroundImage: "url(/assets/content-top-bg.png)" }}
+        style={{ backgroundImage: 'url(/assets/content-top-bg.png)' }}
       ></div>
 
       {/* Main Content */}
       <div
         className="bg-repeat-y bg-top"
-        style={{ backgroundImage: "url(/assets/content-middle-bg.png)" }}
+        style={{ backgroundImage: 'url(/assets/content-middle-bg.png)' }}
       >
         <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row px-16 gap-10">
           {/* Sidebar */}
@@ -34,27 +35,28 @@ const Account = () => {
             <div className="bg-white border border-gray-300">
               <h2 className="text-gray-700 bg-gray-200 text-lg py-2 px-2">Your account</h2>
               <div className="flex flex-col py-2">
-                <a href="#" className="w-full px-2 text-[#343637]">Your Profile</a>
-                <a href="#" className="w-full p-2 text-[#343637]">Alerts</a>
-                <a href="#" className="w-full p-2 text-[#343637]">Reaction given</a>
-                <a href="#" className="w-full p-2 text-[#343637]">Reaction received</a>
-                <a href="#" className="w-full p-2 text-[#343637] border-b border-gray-300">Bookmarks</a>
+                <NavLink to="/account/profile" className="w-full px-2 text-[#343637]">Your Profile</NavLink>
+                <NavLink to="/account/alerts" className="w-full p-2 text-[#343637]">Alerts</NavLink>
+                <NavLink to="/account/reactions-given" className="w-full p-2 text-[#343637]">Reaction given</NavLink>
+                <NavLink to="/account/reactions-received" className="w-full p-2 text-[#343637]">Reaction received</NavLink>
+                <NavLink to="/account/bookmarks" className="w-full p-2 text-[#343637] border-b border-gray-300">Bookmarks</NavLink>
+
                 <h2 className="text-yellow-400 p-2">Settings</h2>
-                <a href="#" className="w-full bg-gray-300 p-2 font-semibold text-[#343637]">Account details</a>
-                <a href="#" className="w-full p-2 text-[#343637]">Password and security</a>
-                <a href="#" className="w-full p-2 text-[#343637]">Privacy</a>
-                <a href="#" className="w-full p-2 text-[#343637]">Preferences</a>
-                <a href="#" className="w-full p-2 text-[#343637]">Minecraft account</a>
-                <a href="#" className="w-full p-2 text-[#343637]">Following</a>
-                <a href="#" className="w-full p-2 text-[#343637]">Ignoring</a>
+                <NavLink to="/account" className="w-full bg-gray-300 p-2 font-semibold text-[#343637]">Account details</NavLink>
+                <NavLink to="/account/password" className="w-full p-2 text-[#343637]">Password and security</NavLink>
+                <NavLink to="/account/privacy" className="w-full p-2 text-[#343637]">Privacy</NavLink>
+                <NavLink to="/account/preferences" className="w-full p-2 text-[#343637]">Preferences</NavLink>
+                <NavLink to="/account/minecraft" className="w-full p-2 text-[#343637]">Minecraft account</NavLink>
+                <NavLink to="/account/following" className="w-full p-2 text-[#343637]">Following</NavLink>
+                <NavLink to="/account/ignoring" className="w-full p-2 text-[#343637]">Ignoring</NavLink>
               </div>
             </div>
             <div className="border border-gray-300 flex flex-col py-2 gap-2">
-              <a href="/logout" className="w-full p-2 text-[#343637]">LogOut</a>
+              <Link to="/login" onClick={logout} className="w-full p-2 text-[#343637]">LogOut</Link>
             </div>
           </aside>
 
-          {/* Right side user info panel */}
+          {/* Right Side Content */}
           <section className="w-full max-w-[600px] bg-white border border-gray-300 rounded-lg p-8 text-[#343637] shadow-md">
             <div className="mb-8">
               <h2 className="text-2xl font-semibold mb-3 border-b border-yellow-400 pb-2">Username</h2>
@@ -84,7 +86,7 @@ const Account = () => {
       {/* Bottom Decoration */}
       <div
         className="h-12 mb-10 bg-no-repeat bg-top"
-        style={{ backgroundImage: "url(/assets/content-bottom-bg.png)" }}
+        style={{ backgroundImage: 'url(/assets/content-bottom-bg.png)' }}
       ></div>
     </div>
   );
