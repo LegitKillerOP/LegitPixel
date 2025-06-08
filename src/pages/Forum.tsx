@@ -11,6 +11,7 @@ import {
 import type { DocumentData } from "firebase/firestore";
 import { db } from '../utils/firebase';
 import { useAuth } from "../context/AuthContext";
+import { Link } from 'react-router-dom';
 
 interface ForumPost {
   id: string;
@@ -219,6 +220,7 @@ const Forum: React.FC = () => {
               key={post.id}
               className="bg-slate-800 rounded-md p-4 hover:bg-slate-700 transition-colors"
             >
+            <Link to={`/forum/${post.id}`} className="block">
               <div className="flex items-center gap-3 mb-2">
                 {post.isPinned && <span className="text-yellow-400 font-bold">📌</span>}
                 <span
@@ -237,6 +239,7 @@ const Forum: React.FC = () => {
                 <span>{post.replies ?? 0} replies</span>
                 <span>{post.views ?? 0} views</span>
               </div>
+            </Link>
             </li>
           ))}
         </ul>

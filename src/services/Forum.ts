@@ -18,12 +18,11 @@ export interface ForumPost {
   title: string;
   content: string;
   category: string;
-  authorId: string;
   authorName: string;
-  createdAt: any;
-  isPinned?: boolean;
-  replies?: number;
-  views?: number;
+  createdAt: Date;
+  replies: number;
+  views: number;
+  isPinned: boolean;
 }
 
 export const createForumPost = async (

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as BrowserRouter , Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import Games from "./pages/Games";
 import Leaderboard from "./pages/Leaderboard";
@@ -11,10 +11,11 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import AdminPanel from "./pages/AdminPanel";
 import Forum from "./pages/Forum";
+import ForumPostPage from "./pages/ForumPostPage";
 
 const App = () => {
   return (
-    <Router>
+<BrowserRouter>
       <div className="p-pageWrapper">
         <Header />
         <Navigation />
@@ -29,12 +30,13 @@ const App = () => {
           <Route path="/account/*" element={<Account />} />
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/forums" element={<Forum />} />
+          <Route path="/forum/:postId" element={<ForumPostPage />} />
         </Routes>
 
         <Footer />
 
       </div>
-    </Router>
+</BrowserRouter>
   );
 };
 
