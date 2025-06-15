@@ -11,7 +11,7 @@ import {
   Megaphone,
   Lightbulb
 } from 'lucide-react';
-
+import LoadingBar from '../components/LoadingBar';
 import { Link } from 'react-router-dom';
 import { db } from '../utils/firebase';
 import {
@@ -45,6 +45,7 @@ interface User {
 const Forum: React.FC = () => {
   const [forumData, setForumData] = useState<Record<string, { count: number; post: ForumPost | null }>>({});
   const [onlineUsers, setOnlineUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [stats, setStats] = useState({
     threads: 0,
     members: 0,
@@ -90,8 +91,12 @@ const Forum: React.FC = () => {
   };
 
   useEffect(() => {
+    let unsubscribe: () => void;
+
     const fetchData = async () => {
       try {
+        setIsLoading(true);
+
         const threadSnapshot = await getDocs(collection(db, 'forumPosts'));
         const membersSnapshot = await getDocs(
           query(collection(db, 'users'), orderBy('createdAt', 'desc'))
@@ -109,7 +114,7 @@ const Forum: React.FC = () => {
           latestMember: membersSnapshot.docs[0]?.data()?.username || 'Unknown',
         });
 
-        const unsubscribe = onSnapshot(
+        unsubscribe = onSnapshot(
           query(collection(db, 'users'), where('isOnline', '==', true)),
           (snapshot) => {
             setOnlineUsers(
@@ -123,13 +128,18 @@ const Forum: React.FC = () => {
           }
         );
 
-        return () => unsubscribe();
+        setIsLoading(false);
       } catch (err) {
         console.error('Error loading forum data:', err);
+        setIsLoading(false);
       }
     };
 
     fetchData();
+
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   const renderCreateButton = (cat: string, isAdminOnly: boolean) => {
@@ -156,6 +166,7 @@ const Forum: React.FC = () => {
     const data = forumData[cat];
     return (
       <div className="border-b border-gray-300 p-3 flex justify-between items-center">
+        <LoadingBar isLoading={isLoading} />
         <Link to={link} className="flex gap-3 items-center">
           <IconComponent className="text-yellow-400" />
           <div>

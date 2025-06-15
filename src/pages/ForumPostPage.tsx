@@ -3,16 +3,18 @@ import { useParams, Link } from 'react-router-dom';
 import { doc, getDoc, updateDoc, increment } from 'firebase/firestore';
 import { db } from '../utils/firebase';
 import type { ForumPost } from '../services/Forum';
+import LoadingBar from '../components/LoadingBar';
 
 const ForumPostPage: React.FC = () => {
   const { postId } = useParams<{ postId: string }>();
   const [post, setPost] = useState<ForumPost | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!postId) return;
 
     const fetchPost = async () => {
+      setIsLoading(true);
       const postRef = doc(db, 'forumPosts', postId);
       const postSnap = await getDoc(postRef);
 
@@ -36,23 +38,42 @@ const ForumPostPage: React.FC = () => {
       } else {
         setPost(null);
       }
-      setLoading(false);
+      setIsLoading(false);
     };
 
     fetchPost();
   }, [postId]);
 
-  if (loading) {
-    return <p className="text-center text-gray-400 mt-8">Loading post...</p>;
+
+  if (isLoading) {
+    return (
+      <div className="font-serif">
+        <LoadingBar isLoading={true} />
+        <div className="h-12 bg-no-repeat bg-top" style={{ backgroundImage: 'url(/assets/content-top-bg.png)' }} />
+        <div className="bg-repeat-y bg-top py-10" style={{ backgroundImage: 'url(/assets/content-middle-bg.png)' }}>
+          <div className="max-w-4xl mx-auto px-6 sm:px-10 text-center text-gray-500">
+            Loading post...
+          </div>
+        </div>
+        <div className="h-12 bg-no-repeat bg-top" style={{ backgroundImage: 'url(/assets/content-bottom-bg.png)' }} />
+      </div>
+    );
   }
 
   if (!post) {
     return (
-      <div className="max-w-3xl mx-auto p-6 bg-slate-900 text-white rounded-md shadow-md mt-8">
-        <p>Post not found.</p>
-        <Link to="/forums" className="text-blue-500 underline">
-          Back to forum
-        </Link>
+      <div className="font-serif">
+        <LoadingBar isLoading={false} />
+        <div className="h-12 bg-no-repeat bg-top" style={{ backgroundImage: 'url(/assets/content-top-bg.png)' }} />
+        <div className="bg-repeat-y bg-top py-10" style={{ backgroundImage: 'url(/assets/content-middle-bg.png)' }}>
+          <div className="max-w-3xl mx-auto p-6 bg-white text-gray-700 rounded-md shadow-md text-center">
+            <p className="mb-4 text-lg">Post not found.</p>
+            <Link to="/forums" className="text-blue-500 underline">
+              Back to forum
+            </Link>
+          </div>
+        </div>
+        <div className="h-12 bg-no-repeat bg-top" style={{ backgroundImage: 'url(/assets/content-bottom-bg.png)' }} />
       </div>
     );
   }
@@ -60,6 +81,7 @@ const ForumPostPage: React.FC = () => {
   return (
     <div className="font-serif">
       {/* Top Image Border */}
+      <LoadingBar isLoading={isLoading} />
       <div className="h-12 bg-no-repeat bg-top" style={{ backgroundImage: 'url(/assets/content-top-bg.png)' }} />
 
       {/* Content */}

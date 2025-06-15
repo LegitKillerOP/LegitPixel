@@ -4,12 +4,14 @@ import { Pin, Trash2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { getForumPosts, deleteForumPost, pinForumPost } from '../services/Forum';
 import type { ForumPost } from '../services/Forum';
+import LoadingBar from '../components/LoadingBar';
 
 const AdminPanel = () => {
   const { userData } = useAuth();
   const navigate = useNavigate();
   const [posts, setPosts] = useState<ForumPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   // New states for requested features:
   const [searchTerm, setSearchTerm] = useState('');
@@ -29,7 +31,7 @@ const AdminPanel = () => {
   }, [userData]);
 
   const loadPosts = async () => {
-    setLoading(true);
+    setIsLoading(true);
     try {
       const forumPosts = await getForumPosts();
       setPosts(forumPosts);
@@ -157,6 +159,7 @@ const AdminPanel = () => {
   if (!userData?.isAdmin) {
     return (
       <div>
+        <LoadingBar isLoading={isLoading} />
         <div className="h-12 bg-no-repeat bg-top" style={{ backgroundImage: 'url(/assets/content-top-bg.png)' }} />
         <div className="max-w-[1200px] mx-auto px-5 sm:px-20 py-8">
           <div className="bg-red-950 border border-red-500 p-8 rounded-lg text-center">

@@ -23,6 +23,7 @@ import Footer from './components/Footer';
 import LoadingBar from './components/LoadingBar';
 import Terms from './pages/Terms';
 import ForumCreate from './pages/ForumCreate';
+import ForumAnnouncements from './pages/Forums/ForumAnnouncements';
 
 const RouteChangeHandler = ({ setIsLoading }: { setIsLoading: (val: boolean) => void }) => {
   const location = useLocation();
@@ -64,6 +65,7 @@ const App = () => {
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/forums" element={<Forum />} />
           <Route path="/forum/:postCategory/:postId" element={<ForumPostPage />} />
+          <Route path="/forum/announcements" element={<ForumAnnouncements />} />
           <Route path="/forum/create" element={<ForumCreate />} />
           <Route path="/terms" element={<Terms />} /> 
         </Routes>
