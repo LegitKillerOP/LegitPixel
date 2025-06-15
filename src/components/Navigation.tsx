@@ -187,7 +187,7 @@ export default function Navigation() {
       {showScrollButton && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-6 right-6 z-50 bg-[#ffd87d] text-black p-3 rounded-full shadow-lg hover:scale-105 transition-transform"
+          className="fixed bottom-6 right-6 z-50 bg-[#ffd87d] text-black p-3 px-5 rounded-full shadow-lg hover:scale-105 transition-transform"
         >
           ↑
         </button>
