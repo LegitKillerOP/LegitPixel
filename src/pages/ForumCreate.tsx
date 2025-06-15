@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { db } from '../utils/firebase';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
@@ -19,11 +19,20 @@ const categories = [
 const ForumCreate: React.FC = () => {
   const { userData } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState(categories[0].value);
   const [error, setError] = useState('');
+
+  // Auto-select category from URL param
+  useEffect(() => {
+    const catParam = searchParams.get('category');
+    if (catParam && categories.some(cat => cat.value === catParam)) {
+      setCategory(catParam);
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,30 +77,32 @@ const ForumCreate: React.FC = () => {
           <li>Create Post</li>
         </ul>
         <div className="py-5 text-white">
-          <h1 className="text-2xl">Create a New Forum Post</h1>
+          <h1 className="text-3xl font-bold">Create a New Forum Post</h1>
         </div>
       </div>
 
       <div className="h-12 bg-no-repeat bg-top" style={{ backgroundImage: 'url(/assets/content-top-bg.png)' }}></div>
 
       <div className="bg-repeat-y bg-top" style={{ backgroundImage: 'url(/assets/content-middle-bg.png)' }}>
-        <div className="max-w-[900px] mx-auto px-8 py-10 bg-white shadow border border-gray-300 rounded">
-          {error && <div className="text-red-600 mb-4">{error}</div>}
+        <div className="max-w-[900px] mx-auto px-8 py-10 bg-white shadow-lg border border-gray-300 rounded-lg">
+          {error && <div className="text-red-600 mb-4 font-semibold">{error}</div>}
+          
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-gray-800 font-semibold mb-1">Title</label>
+              <label className="block text-gray-800 font-semibold mb-2">Title</label>
               <input
                 type="text"
-                className="w-full border border-gray-300 px-3 py-2 rounded"
+                placeholder="Enter your post title"
+                className="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
               />
             </div>
             <div>
-              <label className="block text-gray-800 font-semibold mb-1">Category</label>
+              <label className="block text-gray-800 font-semibold mb-2">Category</label>
               <select
-                className="w-full border border-gray-300 px-3 py-2 rounded"
+                className="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
@@ -103,15 +114,23 @@ const ForumCreate: React.FC = () => {
               </select>
             </div>
             <div>
-              <label className="block text-gray-800 font-semibold mb-1">Content</label>
+              <label className="block text-gray-800 font-semibold mb-2">Content</label>
               <textarea
-                className="w-full border border-gray-300 px-3 py-2 rounded h-40"
+                placeholder="Write your post content here..."
+                className="w-full border border-gray-300 px-4 py-2 rounded h-40 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 required
               ></textarea>
             </div>
-            <div>
+            <div className="flex justify-between items-center">
+              <button
+                type="button"
+                onClick={() => navigate('/forums')}
+                className="text-gray-600 hover:text-black underline"
+              >
+                ← Back to Forum
+              </button>
               <button
                 type="submit"
                 className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold px-6 py-2 rounded"
