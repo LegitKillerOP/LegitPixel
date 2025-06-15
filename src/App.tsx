@@ -23,7 +23,7 @@ import Footer from './components/Footer';
 import LoadingBar from './components/LoadingBar';
 import Terms from './pages/Terms';
 import ForumCreate from './pages/ForumCreate';
-import ForumAnnouncements from './pages/Forums/ForumAnnouncements';
+import ForumCategoryPage from './pages/ForumCategoryPage';
 
 const RouteChangeHandler = ({ setIsLoading }: { setIsLoading: (val: boolean) => void }) => {
   const location = useLocation();
@@ -65,7 +65,15 @@ const App = () => {
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/forums" element={<Forum />} />
           <Route path="/forum/:postCategory/:postId" element={<ForumPostPage />} />
-          <Route path="/forum/announcements" element={<ForumAnnouncements />} />
+          <Route path="/forum/community-info" element={<ForumCategoryPage category="community-info" />} />
+          <Route path="/forum/announcements" element={<ForumCategoryPage category="announcements" />} />
+          <Route path="/forum/support" element={<ForumCategoryPage category="support" />} />
+          <Route path="/forum/suggestions" element={<ForumCategoryPage category="suggestions" />} />
+          <Route path="/forum/hypixel-server" element={<ForumCategoryPage category="hypixel-server" />} />
+          <Route path="/forum/general" element={<ForumCategoryPage category="general" />} />
+          <Route path="/forum/skywars" element={<ForumCategoryPage category="skywars" />} />
+          <Route path="/forum/skyblock" element={<ForumCategoryPage category="skyblock" />} />
+          <Route path="/forum/bedwars" element={<ForumCategoryPage category="bedwars" />} />
           <Route path="/forum/create" element={<ForumCreate />} />
           <Route path="/terms" element={<Terms />} /> 
         </Routes>
