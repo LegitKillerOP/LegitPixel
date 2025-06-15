@@ -143,7 +143,7 @@ const getCategoryBadgeColor = (category: string) => {
     suggestions: 'bg-green-600',
     support: 'bg-orange-500',
     'community-info': 'bg-teal-600',
-    'hypixel-server': 'bg-pink-600',
+    'legitpixel-server': 'bg-pink-600',
   };
   return colors[category] || 'bg-gray-500';
 };

@@ -9,7 +9,7 @@ const categories = [
   { value: 'community-info', label: 'Community Info and Changes', adminOnly: true },
   { value: 'support', label: 'Support (Appeals, Bug Reports)', adminOnly: false },
   { value: 'suggestions', label: 'Suggestions', adminOnly: false },
-  { value: 'hypixel-server', label: 'Hypixel Server Discussion', adminOnly: false },
+  { value: 'legitpixel-server', label: 'LegitPixel Server Discussion', adminOnly: false },
   { value: 'general', label: 'General Discussion', adminOnly: false },
   { value: 'skywars', label: 'SkyWars', adminOnly: false },
   { value: 'skyblock', label: 'SkyBlock', adminOnly: false },

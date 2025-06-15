@@ -58,7 +58,7 @@ const Forum: React.FC = () => {
     { value: 'community-info', label: 'Community Info and Changes', description: 'Changes and updates.', adminOnly: true },
     { value: 'support', label: 'Support (Appeals, Bug Reports)', description: 'Appeals, reports, etc.', adminOnly: false },
     { value: 'suggestions', label: 'Suggestions', description: 'Share your feedback.', adminOnly: false },
-    { value: 'hypixel-server', label: 'Hypixel Server Discussion', description: 'Talk about Hypixel games and updates.', adminOnly: false },
+    { value: 'legitpixel-server', label: 'LegitPixel Server Discussion', description: 'Talk about LegitPixel games and updates.', adminOnly: false },
     { value: 'general', label: 'General Discussion', description: 'Off-topic or general chat.', adminOnly: false },
     { value: 'skywars', label: 'SkyWars', description: 'Discuss SkyWars strategies, maps and tips.', adminOnly: false },
     { value: 'skyblock', label: 'SkyBlock', description: 'SkyBlock economy, guides and co-ops.', adminOnly: false },
@@ -262,9 +262,9 @@ const Forum: React.FC = () => {
               <div className="bg-white border-1 border-gray-300 rounded mb-4">
                 <div className="p-2 bg-gray-200 text-gray-700 border-b-gray-300">
                   <h3>Server & Game Discussions</h3>
-                  <p>Talk about your favorite Hypixel games and topics.</p>
+                  <p>Talk about your favorite LegitPixel games and topics.</p>
                 </div>
-                {renderForumBox('Hypixel Server Discussion', 'Talk about Hypixel games and updates.', '/forum/hypixel-server', 'hypixel-server', false, MessageCircle)}
+                {renderForumBox('LegitPixel Server Discussion', 'Talk about LegitPixel games and updates.', '/forum/legitpixel-server', 'legitpixel-server', false, MessageCircle)}
                 {renderForumBox('General Discussion', 'Off-topic or general chat.', '/forum/general', 'general', false, Users)}
               </div>
 
@@ -272,7 +272,7 @@ const Forum: React.FC = () => {
               <div className="bg-white border-1 border-gray-300 rounded mb-4">
                 <div className="p-2 bg-gray-200 text-gray-700 border-b-gray-300">
                   <h3>Game Categories</h3>
-                  <p>Join discussions about specific Hypixel games.</p>
+                  <p>Join discussions about specific LegitPixel games.</p>
                 </div>
                 {renderForumBox('SkyWars', 'Discuss SkyWars strategies, maps and tips.', '/forum/skywars', 'skywars', false, Gamepad2)}
                 {renderForumBox('SkyBlock', 'SkyBlock economy, guides and co-ops.', '/forum/skyblock', 'skyblock', false, StickyNote)}

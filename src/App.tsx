@@ -69,7 +69,7 @@ const App = () => {
           <Route path="/forum/announcements" element={<ForumCategoryPage category="announcements" />} />
           <Route path="/forum/support" element={<ForumCategoryPage category="support" />} />
           <Route path="/forum/suggestions" element={<ForumCategoryPage category="suggestions" />} />
-          <Route path="/forum/hypixel-server" element={<ForumCategoryPage category="hypixel-server" />} />
+          <Route path="/forum/legitpixel-server" element={<ForumCategoryPage category="legitpixel-server" />} />
           <Route path="/forum/general" element={<ForumCategoryPage category="general" />} />
           <Route path="/forum/skywars" element={<ForumCategoryPage category="skywars" />} />
           <Route path="/forum/skyblock" element={<ForumCategoryPage category="skyblock" />} />
