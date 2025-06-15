@@ -165,7 +165,7 @@ const Forum: React.FC = () => {
   ) => {
     const data = forumData[cat];
     return (
-      <div className="border-b border-gray-300 p-3 flex justify-between items-center">
+      <div className="border-b border-gray-300 p-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <LoadingBar isLoading={isLoading} />
         <Link to={link} className="flex gap-3 items-center">
           <IconComponent className="text-yellow-400" />
@@ -227,7 +227,7 @@ const Forum: React.FC = () => {
       <div className="h-12 bg-no-repeat bg-top" style={{ backgroundImage: 'url(/assets/content-top-bg.png)' }}></div>
 
       <div className="bg-repeat-y bg-top" style={{ backgroundImage: 'url(/assets/content-middle-bg.png)' }}>
-        <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row px-16 gap-4">
+        <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row px-4 sm:px-6 md:px-10 lg:px-16 gap-4">
           <div className="w-full">
             <div className="w-full">
               {/* Section: Official Updates */}
@@ -283,7 +283,7 @@ const Forum: React.FC = () => {
 
           </div>
 
-          <div className="w-full md:w-[250px] space-y-4">
+          <div className="w-full md:w-[250px] space-y-4 flex-shrink-0">
             <div className="bg-white border rounded border-gray-300 flex gap-4 p-4 text-center">
               <UserRound className="user p-1 border-1 rounded-full" />
               <p className="font-semibold text-[#343637]">
