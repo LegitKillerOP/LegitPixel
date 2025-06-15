@@ -66,7 +66,7 @@ const MainHome: React.FC = () => {
           <div className="w-full">
             <div className="flex flex-col gap-4">
               {topPosts.map((post) => (
-                <Link to={`/forum/${post.id}`} key={post.id}>
+                <Link to={`/forum/${post.category}/${post.id}`} key={post.id}>
                   <div className="rounded text-black shadow">
                     <div className="w-full flex justify-between p-2 bg-gray-300 text-lg text-gray-700">
                       <h3>{post.title}</h3>

@@ -30,7 +30,6 @@ const ForumPostPage: React.FC = () => {
           isPinned: data.isPinned ?? false,
         });
 
-        // Increment views atomically
         await updateDoc(postRef, {
           views: increment(1),
         });
@@ -51,7 +50,7 @@ const ForumPostPage: React.FC = () => {
     return (
       <div className="max-w-3xl mx-auto p-6 bg-slate-900 text-white rounded-md shadow-md mt-8">
         <p>Post not found.</p>
-        <Link to="/forum" className="text-blue-500 underline">
+        <Link to="/forums" className="text-blue-500 underline">
           Back to forum
         </Link>
       </div>
@@ -59,43 +58,70 @@ const ForumPostPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-slate-900 text-white rounded-md shadow-md mt-8">
-      <Link to="/forums" className="text-blue-400 underline mb-4 inline-block">
-        &larr; Back to forum
-      </Link>
-      <div className="mb-4">
-        <span
-          className={`px-2 py-1 rounded text-white text-xs font-semibold ${getCategoryBadgeColor(
-            post.category
-          )}`}
-        >
-          {post.category}
-        </span>
+    <div className="font-serif">
+      {/* Top Image Border */}
+      <div className="h-12 bg-no-repeat bg-top" style={{ backgroundImage: 'url(/assets/content-top-bg.png)' }} />
+
+      {/* Content */}
+      <div className="bg-repeat-y bg-top" style={{ backgroundImage: 'url(/assets/content-middle-bg.png)' }}>
+        <div className="max-w-4xl mx-auto px-6 sm:px-10 py-6">
+          <Link to={`/forum/${post.category}`} className="text-yellow-500 underline mb-4 inline-block text-sm">
+            &larr; Back to forum
+          </Link>
+
+          <div className="bg-white border border-gray-300 shadow-lg rounded p-6">
+            <div className="mb-4">
+              <span
+                className={`px-3 py-1 rounded text-white text-xs font-bold uppercase tracking-wide ${getCategoryBadgeColor(
+                  post.category
+                )}`}
+              >
+                {post.category}
+              </span>
+            </div>
+
+            <h1 className="text-3xl font-bold text-[#343637] mb-4">{post.title}</h1>
+
+            <p className="whitespace-pre-line text-gray-800 mb-6 leading-relaxed">{post.content}</p>
+
+            <div className="text-gray-600 text-sm flex flex-wrap gap-6 border-t pt-4">
+              <span>
+                <strong>Author:</strong> {post.authorName}
+              </span>
+              <span>
+                <strong>Posted:</strong> {post.createdAt.toLocaleString()}
+              </span>
+              <span>
+                <strong>Replies:</strong> {post.replies}
+              </span>
+              <span>
+                <strong>Views:</strong> {post.views + 1}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
-      <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-      <p className="whitespace-pre-line mb-6">{post.content}</p>
-      <div className="text-gray-400 text-sm flex flex-wrap gap-4">
-        <span>By {post.authorName}</span>
-        <span>Created: {post.createdAt.toLocaleString()}</span>
-        <span>{post.replies} replies</span>
-        <span>{post.views + 1} views</span>
-      </div>
+
+      {/* Bottom Image Border */}
+      <div className="h-12 bg-no-repeat bg-top" style={{ backgroundImage: 'url(/assets/content-bottom-bg.png)' }} />
     </div>
   );
 };
 
 export default ForumPostPage;
 
-// You can copy getCategoryBadgeColor from your Forum component or extract it to a utils file.
+// Category Badge Color Logic
 const getCategoryBadgeColor = (category: string) => {
   const colors: Record<string, string> = {
     general: 'bg-gray-500',
     skyblock: 'bg-blue-500',
     bedwars: 'bg-red-500',
     skywars: 'bg-yellow-500',
-    announcements: 'bg-purple-500',
-    suggestions: 'bg-green-500',
+    announcements: 'bg-purple-600',
+    suggestions: 'bg-green-600',
     support: 'bg-orange-500',
+    'community-info': 'bg-teal-600',
+    'hypixel-server': 'bg-pink-600',
   };
   return colors[category] || 'bg-gray-500';
 };
