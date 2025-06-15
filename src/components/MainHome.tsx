@@ -16,9 +16,9 @@ interface ForumPost {
   createdAt: Date;
 }
 
-  const [isLoading, setIsLoading] = useState(true);
 const MainHome: React.FC = () => {
   const [topPosts, setTopPosts] = useState<ForumPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
